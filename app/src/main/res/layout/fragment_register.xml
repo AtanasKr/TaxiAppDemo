@@ -10,7 +10,7 @@
         android:id="@+id/submitRegister"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/forward_button"
         android:scaleType="fitCenter"
@@ -23,10 +23,10 @@
     <EditText
         android:id="@+id/registerEmail"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="85dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/edit_text_background"
@@ -38,7 +38,27 @@
         android:textColorHint="#808080"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/registerImage" />
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Name"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -46,19 +66,20 @@
         android:layout_height="65dp"
         android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="120dp"
         android:layout_marginRight="120dp"
         android:background="@drawable/spinner_bakcground"
         android:popupBackground="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/registerName" />
 
     <EditText
-        android:id="@+id/inputPassword2"
+        android:id="@+id/registerPassword"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="85dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
@@ -88,7 +109,7 @@
         app:layout_constraintTop_toTopOf="parent"  />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/registerImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="60dp"

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -52,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_favorites:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new FavoritesFragment()).commit();
+                break;
+            case R.id.nav_logoff:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StartFragment()).commit();
+                FirebaseAuth.getInstance().signOut();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
