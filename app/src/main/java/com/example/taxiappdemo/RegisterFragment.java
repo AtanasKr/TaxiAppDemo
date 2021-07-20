@@ -35,18 +35,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RegisterFragment extends Fragment {
     View holder;
     Uri selectedImageURI;
     ImageView registerImage;
+    String userId;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +78,7 @@ public class RegisterFragment extends Fragment {
         EditText registerPassword = view.findViewById(R.id.registerPassword);
         EditText registerName = view.findViewById(R.id.registerName);
         ImageButton registerBtn = view.findViewById(R.id.submitRegister);
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
         registerImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +106,18 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                userId= firebaseAuth.getCurrentUser().getUid();
+                                DocumentReference documentReference = firebaseFirestore.collection("users").document(userId);
+                                Map<String,Object> user = new HashMap<>();
+                                user.put("fName",name);
+                                user.put("role",spinner.getSelectedItem().toString());
+                                user.put("profileImage",selectedImageURI.toString());
+                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d("data","Data Saved!");
+                                    }
+                                });
                                 Toast.makeText(getContext(),"User Created!",Toast.LENGTH_LONG);
                                 Fragment orderFragment = new OrderFragment();
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
