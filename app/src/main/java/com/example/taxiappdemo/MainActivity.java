@@ -58,15 +58,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
-        DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, FirebaseFirestoreException error) {
-                name.setText(value.getString("fName"));
-                email.setText(firebaseAuth.getCurrentUser().getEmail());
-                Picasso.get().load(Uri.parse(value.getString("profileImage"))).fit().into(userImage);
-            }
-        });
+        if(firebaseAuth.getCurrentUser()!=null) {
+
+            DocumentReference documentReference = firebaseFirestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, FirebaseFirestoreException error) {
+                    name.setText(value.getString("fName"));
+                    email.setText(firebaseAuth.getCurrentUser().getEmail());
+                    Picasso.get().load(Uri.parse(value.getString("profileImage"))).fit().into(userImage);
+                }
+            });
+        }
 
 
     }
@@ -84,8 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new FavoritesFragment()).commit();
                 break;
             case R.id.nav_logoff:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StartFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StartFragment()).commit();
                 FirebaseAuth.getInstance().signOut();
+                finish();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

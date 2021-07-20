@@ -46,6 +46,7 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                getActivity().recreate();
                                 Toast.makeText(getContext(),"Success!",Toast.LENGTH_LONG);
                                 Fragment orderFragment = new OrderFragment();
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
