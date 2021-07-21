@@ -143,7 +143,7 @@ public class RegisterFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 123) {
                 selectedImageURI = data.getData();
-                Picasso.get().load(selectedImageURI).fit().into(registerImage);
+                Picasso.get().load(selectedImageURI).rotate(90).into(registerImage);
             }
 
         }
